@@ -1,0 +1,1 @@
+ALTER TABLE "user_profile" ALTER COLUMN "policy_start_date" DROP NOT NULL;

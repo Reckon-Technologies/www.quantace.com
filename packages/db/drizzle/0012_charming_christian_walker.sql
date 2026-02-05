@@ -1,0 +1,1 @@
+ALTER TABLE "insurance_products" ALTER COLUMN "category_id" SET DATA TYPE uuid;

@@ -1,0 +1,1 @@
+ALTER TABLE "user_profile" RENAME COLUMN "policyStartDate" TO "policy_start_date";
