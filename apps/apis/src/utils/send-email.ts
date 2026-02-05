@@ -1,8 +1,11 @@
+/* eslint-disable no-console */
 import sgMail from "@sendgrid/mail";
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+import env from "@/env";
 
-type SendEmailParams = {
+sgMail.setApiKey(env.SENDGRID_API_KEY!);
+
+interface SendEmailParams {
   to: string;
   subject: string;
   text: string;
@@ -12,7 +15,7 @@ type SendEmailParams = {
 export async function sendEmail({ to, subject, text, html }: SendEmailParams) {
   const msg = {
     to,
-    from: process.env.SENDGRID_EMAIL_FROM!, // Use the email address or domain you verified above
+    from: env.SENDGRID_EMAIL_FROM, // Use the email address or domain you verified above
     subject,
     text,
     html,

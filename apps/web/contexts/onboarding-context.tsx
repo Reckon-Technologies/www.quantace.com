@@ -16,7 +16,7 @@ const defaultFormData: OnboardingFormData = {
   firstName: "",
   middleName: "",
   lastName: "",
-  dob: undefined,
+  dob: new Date(),
   idNumber: "",
   homeAddress: "",
   city: "",

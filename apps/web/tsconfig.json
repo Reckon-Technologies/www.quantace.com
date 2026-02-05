@@ -12,7 +12,7 @@
       }
     ]
   },
-  "references": [{ "path": "../api" }],
+  "references": [{ "path": "../apis" }],
   "include": [
     "next-env.d.ts",
     "next.config.ts",

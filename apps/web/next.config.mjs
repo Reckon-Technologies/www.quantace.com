@@ -55,15 +55,19 @@ const nextConfig = {
     "@workspace/db",
   ],
   async rewrites() {
-    if (process.env.NODE_ENV === 'development') {
-      return [
-        {
-          source: '/api/:path*',
-          destination: 'http://localhost:9999/:path*',
-        },
-      ];
-    }
-    return [];
+    const isLocal
+      = process.env.NODE_ENV !== "production" && !process.env.VERCEL;
+    const backendUrl
+      = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:9999";
+
+    return [
+      {
+        source: "/api/:path*",
+        destination: isLocal
+          ? "http://localhost:9999/api/:path*"
+          : `${backendUrl}/api/:path*`,
+      },
+    ];
   },
   async headers() {
     return [

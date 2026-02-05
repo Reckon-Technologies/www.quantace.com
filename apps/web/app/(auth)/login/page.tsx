@@ -1,7 +1,7 @@
 "use client";
 
+import { authClient } from "@/lib/auth/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createAuthClient } from "@workspace/auth/client";
 import { Button } from "@workspace/ui/components/button";
 import {
   Card,
@@ -40,7 +40,7 @@ export interface ILoginPageProps {}
 
 export default function LoginPage(props: ILoginPageProps) {
   const router = useRouter();
-  const { signIn } = createAuthClient();
+  const { signIn } = authClient;
 
   const form = useForm<SignInForm>({
     resolver: zodResolver(signInFormSchema),

@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createAuthClient } from "@workspace/auth/client";
 import { Button } from "@workspace/ui/components/button";
 import {
   Card,
@@ -20,6 +19,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
 import { Suspense } from "react";
+import { authClient } from "@/lib/auth/auth-client";
 
 const resetPasswordSchema = z
   .object({
@@ -53,7 +53,7 @@ function ResetPasswordContent() {
   });
 
   const { isSubmitting } = form.formState;
-  const { resetPassword } = createAuthClient();
+  const { resetPassword } = authClient;
 
   async function handleResetPassword(data: ResetPasswordForm) {
     if (!token) return;

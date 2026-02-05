@@ -1,17 +1,17 @@
 import { sendEmail } from "./send-email";
 
-interface IsendEmailVerificationEmailProps {
+interface ISendEmailVerificationEmailProps {
   user: {
     name: string;
     email: string;
   };
   url: string;
-}
+};
 
 export async function sendEmailVerificationEmail({
   user,
   url,
-}: IsendEmailVerificationEmailProps) {
+}: ISendEmailVerificationEmailProps) {
   await sendEmail({
     to: user.email,
     subject: "Verify your email address",
@@ -26,6 +26,15 @@ export async function sendEmailVerificationEmail({
               <p>Best regards,<br>Quantace Team</p>
             </div>
           `,
-    text: `Hello ${user.name},\n\nThank you for signing up! Please verify your email address by clicking this link: ${url}\n\nIf you didn't create an account, please ignore this email.\n\nThis link will expire in 24 hours.\n\nBest regards,\nQuantace Team`,
+    text: `Hello ${user.name},
+
+Thank you for signing up! Please verify your email address by clicking this link: ${url}
+
+If you didn't create an account, please ignore this email.
+
+This link will expire in 24 hours.
+
+Best regards,
+Quantace Team`,
   });
 }

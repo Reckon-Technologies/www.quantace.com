@@ -2,7 +2,6 @@
 
 import { Book, HelpCircle, Menu, Sunset, Trees, Zap } from "lucide-react";
 
-import { createAuthClient } from "@workspace/auth/client";
 import {
   Accordion,
   AccordionContent,
@@ -43,6 +42,7 @@ import { cn } from "@workspace/ui/lib/utils";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { authClient } from "@/lib/auth/auth-client";
 
 interface MenuItem {
   title: string;
@@ -164,7 +164,7 @@ const Navbar = ({
   const router = useRouter();
   const pathname = usePathname();
 
-  const { signOut } = createAuthClient();
+  const { signOut } = authClient;
 
   return (
     <section className="py-4 px-2.5 bg-dark-blue">

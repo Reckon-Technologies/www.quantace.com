@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createAuthClient } from "@workspace/auth/client";
+import { authClient } from "@/lib/auth/auth-client";
 import { Button } from "@workspace/ui/components/button";
 import {
   Card,
@@ -27,7 +27,7 @@ type ForgotPasswordForm = z.infer<typeof forgotPaswordFormSchema>;
 type ILoginPageProps = object;
 
 export default function LoginPage(_props: ILoginPageProps) {
-  const { requestPasswordReset } = createAuthClient();
+  const { requestPasswordReset } = authClient;
 
   const form = useForm<ForgotPasswordForm>({
     resolver: zodResolver(forgotPaswordFormSchema),

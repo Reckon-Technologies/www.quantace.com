@@ -1,15 +1,17 @@
 import configureOpenAPI from "@/lib/configure-open-api";
 import createApp from "@/lib/create-app";
+import auth from "@/routes/auth/auth.index";
 import index from "@/routes/index.route";
 import insuranceCategories from "@/routes/insurance-category/insurance-category.index";
 import insuranceProducts from "@/routes/insurance-product/insurance-product.index";
 import userProfile from "@/routes/user-profile/user-profile.index";
 
-const app = createApp();
+const app = createApp().basePath("/api");
 
 configureOpenAPI(app);
 
 const routes = [
+  auth,
   index,
   insuranceCategories,
   insuranceProducts,

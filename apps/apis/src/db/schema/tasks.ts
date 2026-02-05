@@ -1,21 +1,22 @@
-import { z } from "@hono/zod-openapi";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 import { toZodV4SchemaTyped } from "@/lib/zod-utils";
 
-export const tasks = sqliteTable("tasks", {
-  id: integer({ mode: "number" })
-    .primaryKey({ autoIncrement: true }),
-  name: text().notNull(),
-  done: integer({ mode: "boolean" })
+export const tasks = pgTable("tasks", {
+  id: text("id")
+    .primaryKey(),
+  name: text("name").notNull(),
+  done: boolean()
     .notNull()
     .default(false),
-  createdAt: integer({ mode: "timestamp" })
-    .$defaultFn(() => new Date()),
-  updatedAt: integer({ mode: "timestamp" })
-    .$defaultFn(() => new Date())
-    .$onUpdate(() => new Date()),
+  createdAt: timestamp("created_at")
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp("updated_at")
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
 });
 
 export const selectTasksSchema = toZodV4SchemaTyped(createSelectSchema(tasks));
