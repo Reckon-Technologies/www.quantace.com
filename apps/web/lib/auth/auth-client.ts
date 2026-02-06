@@ -1,9 +1,10 @@
+import { env } from "@/env";
 import type { auth } from "apis/auth";
 
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
-    baseURL: process.env.NEXT_PUBLIC_URL,
+    baseURL: env.NEXT_PUBLIC_URL,
     plugins: []
 });
 

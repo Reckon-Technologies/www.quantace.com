@@ -52,6 +52,13 @@ export const auth = betterAuth({
       }
     }),
   },
-  trustedOrigins: ["http://localhost:3000", env.FRONTEND_URL],
+  trustedOrigins: ["https://localhost:3000", env.FRONTEND_URL],
   plugins: [openAPI(), nextCookies()],
+  advanced: {
+    defaultCookieAttributes: {
+      sameSite: "none",
+      secure: true,
+      partitioned: true,
+    },
+  },
 });
