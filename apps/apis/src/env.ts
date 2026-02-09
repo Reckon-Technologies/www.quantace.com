@@ -24,6 +24,7 @@ const EnvSchema = z.object({
   FRONTEND_URL: z.string(),
   SENDGRID_API_KEY: z.string(),
   SENDGRID_EMAIL_FROM: z.string(),
+  BETTER_AUTH_URL: z.string(),
 }).superRefine((input, ctx) => {
   if (input.NODE_ENV === "production" && !input.DATABASE_AUTH_TOKEN) {
     ctx.addIssue({
