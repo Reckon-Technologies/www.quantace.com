@@ -20,27 +20,27 @@ import z from "zod";
 // Enhanced schema with proper validation rules
 const onboardingNameFormSchema = onboardingFormSchema
   .pick({
-    firstName: true,
-    middleName: true,
-    lastName: true,
+    first_name: true,
+    middle_name: true,
+    last_name: true,
     dob: true,
-    idNumber: true,
-    homeAddress: true,
+    id_number: true,
+    home_address: true,
     city: true,
     county: true,
     email: true,
-    phoneNumber: true,
+    phone_number: true,
   })
   .extend({
     // Add specific validation rules
-    firstName: z.string().min(1, "First name is required"),
-    lastName: z.string().min(1, "Last name is required"),
-    idNumber: z.string().min(1, "ID number is required"),
-    homeAddress: z.string().min(1, "Home address is required"),
+    first_name: z.string().min(1, "First name is required"),
+    last_name: z.string().min(1, "Last name is required"),
+    id_number: z.string().min(1, "ID number is required"),
+    home_address: z.string().min(1, "Home address is required"),
     city: z.string().min(1, "City is required"),
     county: z.string().min(1, "County is required"),
     email: z.string().email("Please enter a valid email address"),
-    phoneNumber: z.string().min(1, "Phone number is required"),
+    phone_number: z.string().min(1, "Phone number is required"),
   });
 
 type OnboardingNameFormData = z.infer<typeof onboardingNameFormSchema>;
@@ -56,16 +56,16 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
     mode: "onChange", // Validates on every change
     reValidateMode: "onChange", // Re-validates on every change
     defaultValues: {
-      firstName: "",
-      middleName: "",
-      lastName: "",
+      first_name: "",
+      middle_name: "",
+      last_name: "",
       dob: undefined,
-      idNumber: "",
-      homeAddress: "",
+      id_number: "",
+      home_address: "",
       city: "",
       county: "",
       email: "",
-      phoneNumber: "",
+      phone_number: "",
     },
   });
 
@@ -107,7 +107,7 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
           {/* First Name - Required */}
           <Controller
             control={form.control}
-            name="firstName"
+            name="first_name"
             render={({ field, fieldState }) => (
               <Field
                 className="col-span-4 @3xl:col-span-4 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -119,10 +119,10 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
                 </FieldLabel>
                 <div className="w-full">
                   <Input
-                    key="firstName"
+                    key="first_name"
                     placeholder="First name"
                     type="text"
-                    id="firstName"
+                    id="first_name"
                     className={fieldState.invalid ? "border-red-500" : ""}
                     {...field}
                   />
@@ -137,7 +137,7 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
           {/* Middle Name - Optional */}
           <Controller
             control={form.control}
-            name="middleName"
+            name="middle_name"
             render={({ field, fieldState }) => (
               <Field
                 className="col-span-4 @3xl:col-span-4 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -146,10 +146,10 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
                 <FieldLabel className="flex shrink-0">Middle name</FieldLabel>
                 <div className="w-full">
                   <Input
-                    key="middleName"
+                    key="middle_name"
                     placeholder="Middle name"
                     type="text"
-                    id="middleName"
+                    id="middle_name"
                     className={fieldState.invalid ? "border-red-500" : ""}
                     {...field}
                   />
@@ -164,7 +164,7 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
           {/* Last Name - Required */}
           <Controller
             control={form.control}
-            name="lastName"
+            name="last_name"
             render={({ field, fieldState }) => (
               <Field
                 className="col-span-4 @3xl:col-span-4 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -175,10 +175,10 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
                 </FieldLabel>
                 <div className="w-full">
                   <Input
-                    key="lastName"
+                    key="last_name"
                     placeholder="Last name"
                     type="text"
-                    id="lastName"
+                    id="last_name"
                     className={fieldState.invalid ? "border-red-500" : ""}
                     {...field}
                   />
@@ -244,7 +244,7 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
           {/* ID Number - Required */}
           <Controller
             control={form.control}
-            name="idNumber"
+            name="id_number"
             render={({ field, fieldState }) => (
               <Field
                 className="col-span-6 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -256,10 +256,10 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
                 </FieldLabel>
                 <div className="w-full">
                   <Input
-                    key="idNumber"
+                    key="id_number"
                     placeholder="Enter ID or passport number"
                     type="text"
-                    id="idNumber"
+                    id="id_number"
                     className={fieldState.invalid ? "border-red-500" : ""}
                     {...field}
                   />
@@ -274,7 +274,7 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
           {/* Home Address - Required */}
           <Controller
             control={form.control}
-            name="homeAddress"
+            name="home_address"
             render={({ field, fieldState }) => (
               <Field
                 className="col-span-12 @3xl:col-span-12 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -285,10 +285,10 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
                 </FieldLabel>
                 <div className="w-full">
                   <Input
-                    key="homeAddress"
+                    key="home_address"
                     placeholder="Enter your home address"
                     type="text"
-                    id="homeAddress"
+                    id="home_address"
                     className={fieldState.invalid ? "border-red-500" : ""}
                     {...field}
                   />
@@ -390,7 +390,7 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
           {/* Phone Number - Required */}
           <Controller
             control={form.control}
-            name="phoneNumber"
+            name="phone_number"
             render={({ field, fieldState }) => (
               <Field
                 className="col-span-6 @3xl:col-span-6 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -401,10 +401,10 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
                 </FieldLabel>
                 <div className="w-full">
                   <Input
-                    key="phoneNumber"
+                    key="phone_number"
                     placeholder="+254700000000"
                     type="tel"
-                    id="phoneNumber"
+                    id="phone_number"
                     className={fieldState.invalid ? "border-red-500" : ""}
                     {...field}
                   />
@@ -464,16 +464,16 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
 // import z from "zod";
 
 // const onboardingNameFormSchema = onboardingFormSchema.pick({
-//   firstName: true,
-//   middleName: true,
-//   lastName: true,
+//   first_name: true,
+//   middle_name: true,
+//   last_name: true,
 //   dob: true,
-//   idNumber: true,
-//   homeAddress: true,
+//   id_number: true,
+//   home_address: true,
 //   city: true,
 //   county: true,
 //   email: true,
-//   phoneNumber: true,
+//   phone_number: true,
 // });
 
 // type OnboardingNameFormData = z.infer<typeof onboardingNameFormSchema>;
@@ -489,16 +489,16 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
 //     mode: "onChange",
 //     reValidateMode: "onBlur",
 //     defaultValues: {
-//       firstName: "",
-//       middleName: "",
-//       lastName: "",
+//       first_name: "",
+//       middle_name: "",
+//       last_name: "",
 //       dob: undefined,
-//       idNumber: "",
-//       homeAddress: "",
+//       id_number: "",
+//       home_address: "",
 //       city: "",
 //       county: "",
 //       email: "",
-//       phoneNumber: "",
+//       phone_number: "",
 //     },
 //   });
 
@@ -524,7 +524,7 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
 //         <div className="grid grid-cols-12 gap-4 flex-1">
 //           <Controller
 //             control={form.control}
-//             name=firstName
+//             name=first_name
 //             render={({ field, fieldState }) => (
 //               <Field
 //                 className="col-span-4 @3xl:col-span-4 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -535,10 +535,10 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
 //                 </FieldLabel>
 //                 <div className="w-full">
 //                   <Input
-//                     key=firstName
+//                     key=first_name
 //                     placeholder="First name"
 //                     type="text"
-//                     id=firstName
+//                     id=first_name
 //                     className=" "
 //                     {...field}
 //                   />
@@ -551,7 +551,7 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
 //           />
 //           <Controller
 //             control={form.control}
-//             name=middleName
+//             name=middle_name
 //             render={({ field, fieldState }) => (
 //               <Field
 //                 className="col-span-4 @3xl:col-span-4 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -560,10 +560,10 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
 //                 <FieldLabel className="flex shrink-0"></FieldLabel>
 //                 <div className="w-full">
 //                   <Input
-//                     key=middleName
+//                     key=middle_name
 //                     placeholder="Middle name"
 //                     type="text"
-//                     id=middleName
+//                     id=middle_name
 //                     className=" "
 //                     {...field}
 //                   />
@@ -576,7 +576,7 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
 //           />
 //           <Controller
 //             control={form.control}
-//             name=lastName
+//             name=last_name
 //             render={({ field, fieldState }) => (
 //               <Field
 //                 className="col-span-4 @3xl:col-span-4 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -585,10 +585,10 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
 //                 <FieldLabel className="flex shrink-0"></FieldLabel>
 //                 <div className="w-full">
 //                   <Input
-//                     key=lastName
+//                     key=last_name
 //                     placeholder="Last name"
 //                     type="text"
-//                     id=lastName
+//                     id=last_name
 //                     className=" "
 //                     {...field}
 //                   />
@@ -644,7 +644,7 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
 //           />
 //           <Controller
 //             control={form.control}
-//             name=idNumber
+//             name=id_number
 //             render={({ field, fieldState }) => (
 //               <Field
 //                 className="col-span-6 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -655,10 +655,10 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
 //                 </FieldLabel>
 //                 <div className="w-full">
 //                   <Input
-//                     key=idNumber
+//                     key=id_number
 //                     placeholder=""
 //                     type="text"
-//                     id=idNumber
+//                     id=id_number
 //                     className=" "
 //                     {...field}
 //                   />
@@ -671,7 +671,7 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
 //           />
 //           <Controller
 //             control={form.control}
-//             name=homeAddress
+//             name=home_address
 //             render={({ field, fieldState }) => (
 //               <Field
 //                 className="col-span-12 @3xl:col-span-12 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -680,10 +680,10 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
 //                 <FieldLabel className="flex shrink-0">Home Address</FieldLabel>
 //                 <div className="w-full">
 //                   <Input
-//                     key=homeAddress
+//                     key=home_address
 //                     placeholder=""
 //                     type="text"
-//                     id=homeAddress
+//                     id=home_address
 //                     className=" "
 //                     {...field}
 //                   />
@@ -775,7 +775,7 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
 //           />
 //           <Controller
 //             control={form.control}
-//             name=phoneNumber
+//             name=phone_number
 //             render={({ field, fieldState }) => (
 //               <Field
 //                 className="col-span-6 @3xl:col-span-6 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -784,10 +784,10 @@ export default function OnboardingNameForm(props: IOnboardingNameFormProps) {
 //                 <FieldLabel className="flex shrink-0">Phone number</FieldLabel>
 //                 <div className="w-full">
 //                   <Input
-//                     key=phoneNumber
+//                     key=phone_number
 //                     placeholder="+254700000000"
 //                     type="text"
-//                     id=phoneNumber
+//                     id=phone_number
 //                     className=" "
 //                     {...field}
 //                   />

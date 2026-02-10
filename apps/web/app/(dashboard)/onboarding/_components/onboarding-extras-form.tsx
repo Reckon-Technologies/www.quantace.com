@@ -14,9 +14,9 @@ const onboardingNameFormSchema = onboardingFormSchema.pick({
   height: true,
   weight: true,
   smoker: true,
-  medicalConditions: true,
-  doctorsName: true,
-  doctorsPhoneNumber: true,
+  medical_conditions: true,
+  doctors_name: true,
+  doctors_phone_number: true,
 });
 
 type OnboardingExtrasFormData = z.infer<typeof onboardingNameFormSchema>;
@@ -37,9 +37,9 @@ export default function OnboardingExtrasForm(
       height: 0,
       weight: 0,
       smoker: false,
-      medicalConditions: "",
-      doctorsName: "",
-      doctorsPhoneNumber: "",
+      medical_conditions: "",
+      doctors_name: "",
+      doctors_phone_number: "",
     },
   });
 
@@ -161,7 +161,7 @@ export default function OnboardingExtrasForm(
           />
           <Controller
             control={form.control}
-            name="medicalConditions"
+            name="medical_conditions"
             render={({ field, fieldState }) => (
               <Field
                 className="col-span-12 @3xl:col-span-12 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -173,8 +173,8 @@ export default function OnboardingExtrasForm(
 
                 <div className="w-full">
                   <Textarea
-                    key="medicalConditions"
-                    id="medicalConditions"
+                    key="medical_conditions"
+                    id="medical_conditions"
                     placeholder=""
                     className=""
                     {...field}
@@ -189,7 +189,7 @@ export default function OnboardingExtrasForm(
           />
           <Controller
             control={form.control}
-            name="doctorsName"
+            name="doctors_name"
             render={({ field, fieldState }) => (
               <Field
                 className="col-span-12 @3xl:col-span-6 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -202,10 +202,10 @@ export default function OnboardingExtrasForm(
                 <div className="w-full">
                   <>
                     <Input
-                      key="doctorsName"
+                      key="doctors_name"
                       placeholder=""
                       type="text"
-                      id="doctorsName"
+                      id="doctors_name"
                       className=" "
                       {...field}
                     />
@@ -220,7 +220,7 @@ export default function OnboardingExtrasForm(
           />
           <Controller
             control={form.control}
-            name="doctorsPhoneNumber"
+            name="doctors_phone_number"
             render={({ field, fieldState }) => (
               <Field
                 className="col-span-12 @3xl:col-span-6 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -233,10 +233,10 @@ export default function OnboardingExtrasForm(
                 <div className="w-full">
                   <>
                     <Input
-                      key="doctorsPhoneNumber"
+                      key="doctors_phone_number"
                       placeholder=""
                       type="text"
-                      id="doctorsPhoneNumber"
+                      id="doctors_phone_number"
                       className=" "
                       {...field}
                     />

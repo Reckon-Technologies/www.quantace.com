@@ -22,7 +22,7 @@ export interface IQuotesPageProps {
 export default function Quotes({ insuranceQuotes }: IQuotesPageProps) {
   return (
     <div className="w-full flex flex-1 bg-muted">
-      <div className="w-full grid grid-cols-7 gap-4 container mx-auto my-4">
+      <div className="w-full grid grid-cols-1 md:grid-cols-7 gap-4 container mx-auto my-4">
         {/* Side Menu */}
         <div className="col-span-2">
           <SidebarMenu />

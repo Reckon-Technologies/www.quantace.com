@@ -14,39 +14,39 @@ import z from "zod";
 
 export const userProfile = pgTable("user_profile", {
   id: uuid('id').primaryKey().defaultRandom(),
-  userId: text("user_id")
+  user_id: text("user_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }), // Reference to your Better-auth users
-  firstName: text("first_name").notNull(),
-  middleName: text("middle_name"),
-  lastName: text("last_name").notNull(),
+  first_name: text("first_name").notNull(),
+  middle_name: text("middle_name"),
+  last_name: text("last_name").notNull(),
   dob: text("dob").notNull(),
-  idNumber: text("id_number").notNull(),
-  homeAddress: text("home_address").notNull(),
+  id_number: text("id_number").notNull(),
+  home_address: text("home_address").notNull(),
   city: text("city").notNull(),
   county: text("county").notNull(),
   email: text("email").notNull(),
-  phoneNumber: text("phone_number").notNull(),
-  coverageType: text("coverage_type").notNull(),
-  policyPlan: text("policy_plan").notNull(),
-  policyStartDate: text("policy_start_date"),
+  phone_number: text("phone_number").notNull(),
+  coverage_type: text("coverage_type").notNull(),
+  policy_plan: text("policy_plan").notNull(),
+  policy_start_date: text("policy_start_date"),
   addons: text("addons").array(), // Consider using an array type if supported
   height: integer("height"), // in cm
   weight: integer("weight"), // in kg
   smoker: boolean("smoker").default(false).notNull(),
-  medicalConditions: text("medical_conditions"),
-  doctorsName: text("doctors_name"),
-  doctorsPhoneNumber: text("doctors_phone_number"),
+  medical_conditions: text("medical_conditions"),
+  doctors_name: text("doctors_name"),
+  doctors_phone_number: text("doctors_phone_number"),
   status: text("status").default("submitted").notNull(),
-  createdAt: integer('created_at').notNull().default(sql`extract(epoch from now())`),
-  updatedAt: integer('updated_at').notNull().default(sql`extract(epoch from now())`).$onUpdate(() => sql`extract(epoch from now())`)
+  created_at: integer('created_at').notNull().default(sql`extract(epoch from now())`),
+  updated_at: integer('updated_at').notNull().default(sql`extract(epoch from now())`).$onUpdate(() => sql`extract(epoch from now())`)
 });
 
 // Export schemas with type assertions
 export const insertUserProfileSchema = toZodV4SchemaTyped(createInsertSchema(userProfile).omit({
   id: true,
-  createdAt: true,
-  updatedAt: true
+  created_at: true,
+  updated_at: true
 }));
 export const selectUserProfileSchema = toZodV4SchemaTyped(createSelectSchema(userProfile));
 

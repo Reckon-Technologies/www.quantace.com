@@ -43,7 +43,7 @@ export default function WelcomeBanner({
                 orientation={"vertical"}
                 className="bg-background/50 w-[1px]"
               />
-              <Button className="lg:h-16 lg:min-w-40 rounded-lg bg-[#CCFBF1]/30 hover:bg-[#CCFBF1]/40 flex flex-col cursor-pointer">
+              <Button className="relative lg:h-16 lg:min-w-40 rounded-lg bg-[#CCFBF1]/30 hover:bg-[#CCFBF1]/40 flex flex-col cursor-pointer">
                 <BellDot />
                 <span className="hidden lg:inline-flex">Notifications</span>
               </Button>
@@ -56,7 +56,7 @@ export default function WelcomeBanner({
               </Button>
             </ButtonGroup>
 
-            <ButtonGroup className="flex items-center">
+            {/* <ButtonGroup className="flex items-center">
               <Button
                 variant="ghost"
                 size="icon"
@@ -65,7 +65,7 @@ export default function WelcomeBanner({
               >
                 <X className="h-4 w-4" />
               </Button>
-            </ButtonGroup>
+            </ButtonGroup> */}
           </ButtonGroup>
         </div>
       </div>

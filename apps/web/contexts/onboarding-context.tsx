@@ -13,26 +13,26 @@ interface OnboardingContextType {
 }
 
 const defaultFormData: OnboardingFormData = {
-  firstName: "",
-  middleName: "",
-  lastName: "",
+  first_name: "",
+  middle_name: "",
+  last_name: "",
   dob: new Date(),
-  idNumber: "",
-  homeAddress: "",
+  id_number: "",
+  home_address: "",
   city: "",
   county: "",
   email: "",
-  phoneNumber: "",
-  coverageType: "",
-  policyPlan: "",
-  policyStartDate: undefined,
+  phone_number: "",
+  coverage_type: "",
+  policy_plan: "",
+  policy_start_date: new Date(),
   addons: [],
   height: undefined,
   weight: undefined,
   smoker: false,
-  medicalConditions: "",
-  doctorsName: "",
-  doctorsPhoneNumber: "",
+  medical_conditions: "",
+  doctors_name: "",
+  doctors_phone_number: "",
 };
 
 const OnboardingContext = React.createContext<

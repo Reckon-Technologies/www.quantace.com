@@ -1,26 +1,26 @@
 import * as z from "zod";
 
 export const onboardingFormSchema = z.object({
-  firstName: z.string(),
-  middleName: z.string(),
-  lastName: z.string(),
+  first_name: z.string(),
+  middle_name: z.string(),
+  last_name: z.string(),
   dob: z.date(),
-  idNumber: z.string(),
-  homeAddress: z.string(),
+  id_number: z.string(),
+  home_address: z.string(),
   city: z.string(),
   county: z.string(),
   email: z.string(),
-  phoneNumber: z.string(),
-  coverageType: z.string(),
-  policyPlan: z.string(),
-  policyStartDate: z.date().optional(),
+  phone_number: z.string(),
+  coverage_type: z.string(),
+  policy_plan: z.string(),
+  policy_start_date: z.date(),
   addons: z.array(z.string()).optional(),
   height: z.coerce.number().optional(),
   weight: z.coerce.number().optional(),
   smoker: z.coerce.boolean().default(false).optional(),
-  medicalConditions: z.string(),
-  doctorsName: z.string(),
-  doctorsPhoneNumber: z.string(),
+  medical_conditions: z.string(),
+  doctors_name: z.string(),
+  doctors_phone_number: z.string(),
 });
 
 export type OnboardingFormData = z.infer<typeof onboardingFormSchema>;

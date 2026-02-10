@@ -20,6 +20,7 @@ import { format } from "date-fns";
 import { useRouter } from "next/navigation";
 import OnboardingCoverageFormDetails from "./onboarding-coverage-details";
 import OnboardingNameForm from "./onboarding-name-form";
+import { authClient } from "@/lib/auth/auth-client";
 
 const TOTAL_STEPS = 3;
 
@@ -27,14 +28,16 @@ const onboardingNameFormSchema = onboardingFormSchema.pick({
   height: true,
   weight: true,
   smoker: true,
-  medicalConditions: true,
-  doctorsName: true,
-  doctorsPhoneNumber: true,
+  medical_conditions: true,
+  doctors_name: true,
+  doctors_phone_number: true,
 });
 
 type OnboardingExtrasFormData = z.infer<typeof onboardingNameFormSchema>;
 
 export function OnboardingMultistepForm() {
+  const { data: session } = authClient.useSession();
+
   const router = useRouter();
 
   const { currentStep, formData, resetForm, setCurrentStep, updateFormData } =
@@ -48,15 +51,26 @@ export function OnboardingMultistepForm() {
       height: 0,
       weight: 0,
       smoker: false,
-      medicalConditions: "",
-      doctorsName: "",
-      doctorsPhoneNumber: "",
+      medical_conditions: "",
+      doctors_name: "",
+      doctors_phone_number: "",
     },
   });
 
   async function onSubmit(data: Partial<z.infer<typeof onboardingFormSchema>>) {
-    type InsertUserProfile = typeof schema.insertUserProfileSchema
-    const finalFormData  = { ...formData, ...data };
+  const combinedData = {
+    ...formData,
+    ...data,
+  };
+
+  const finalFormData: schema.InsertUserProfile  = { 
+    ...combinedData,
+    user_id: session?.user.id ?? "",
+    dob: combinedData.dob instanceof Date ? combinedData.dob.toISOString() : "",
+    policy_start_date: combinedData.policy_start_date instanceof Date 
+      ? combinedData.policy_start_date?.toISOString() 
+      : undefined,
+  };
     try {
       const f = schema.insertUserProfileSchema.parse(finalFormData)
       const result = await client["user-profile"].$post({
@@ -65,7 +79,7 @@ export function OnboardingMultistepForm() {
 
       console.log("SUCCESS", result.json());
     } catch (error) {
-      console.error("Internal server error");
+      console.error("Internal server error", error);
       if (error instanceof z.ZodError) {
       // Handle validation errors
       toast.error("Please check your form data", {
@@ -90,45 +104,6 @@ export function OnboardingMultistepForm() {
 
     router.push("/dashboard");
   }
-
-  // apps/web/app/(dashboard)/onboarding/_components/onboarding-multistep-form.tsx
-  // async function onSubmit(data: Partial<z.infer<typeof onboardingFormSchema>>) {
-  //   try {
-  //     const finalFormData = {
-  //       ...formData,
-  //       ...data,
-  //       dob: data.dob ? format(data.dob, "yyyy-MM-dd") : "",
-  //       policyStartDate: data.policyStartDate
-  //         ? format(data.policyStartDate, "yyyy-MM-dd")
-  //         : "",
-  //     };
-
-  //     console.log("📤 Submitting form data:", finalFormData);
-
-  //     // const validatedData = onboardingFormSchema.parse(finalFormData);
-
-  //     const response = await client["user-profile"].$post({
-  //       json: finalFormData,
-  //     });
-  //     // console.log("RESPONSE>>>>>>", response);
-
-  //     if (!response.ok) {
-  //       const error = await response.json();
-  //       console.error("❌ API Error:", error);
-  //       toast.error("Failed to submit form");
-  //       return;
-  //     }
-
-  //     const result = await response.json();
-  //     console.log("✅ Success:", result);
-
-  //     toast.success("Onboarding submitted successfully!");
-  //     router.push("/dashboard");
-  //   } catch (error) {
-  //     console.error("❌ Network error:", error);
-  //     toast.error("Network error - please try again");
-  //   }
-  // }
 
   const handleBack = () => {
     if (currentStep > 0) {
@@ -249,7 +224,7 @@ export function OnboardingMultistepForm() {
                 />
                 <Controller
                   control={form.control}
-                  name="medicalConditions"
+                  name="medical_conditions"
                   render={({ field, fieldState }) => (
                     <Field
                       className="col-span-12 @3xl:col-span-12 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -261,8 +236,8 @@ export function OnboardingMultistepForm() {
 
                       <div className="w-full">
                         <Textarea
-                          key="medicalConditions"
-                          id="medicalConditions"
+                          key="medical_conditions"
+                          id="medical_conditions"
                           placeholder=""
                           className=""
                           {...field}
@@ -277,7 +252,7 @@ export function OnboardingMultistepForm() {
                 />
                 <Controller
                   control={form.control}
-                  name="doctorsName"
+                  name="doctors_name"
                   render={({ field, fieldState }) => (
                     <Field
                       className="col-span-12 @3xl:col-span-6 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -290,10 +265,10 @@ export function OnboardingMultistepForm() {
                       <div className="w-full">
                         <>
                           <Input
-                            key="doctorsName"
+                            key="doctors_name"
                             placeholder=""
                             type="text"
-                            id="doctorsName"
+                            id="doctors_name"
                             className=" "
                             {...field}
                           />
@@ -308,7 +283,7 @@ export function OnboardingMultistepForm() {
                 />
                 <Controller
                   control={form.control}
-                  name="doctorsPhoneNumber"
+                  name="doctors_phone_number"
                   render={({ field, fieldState }) => (
                     <Field
                       className="col-span-12 @3xl:col-span-6 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -321,10 +296,10 @@ export function OnboardingMultistepForm() {
                       <div className="w-full">
                         <>
                           <Input
-                            key="doctorsPhoneNumber"
+                            key="doctors_phone_number"
                             placeholder=""
                             type="text"
-                            id="doctorsPhoneNumber"
+                            id="doctors_phone_number"
                             className=" "
                             {...field}
                           />

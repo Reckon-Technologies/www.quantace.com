@@ -15,7 +15,7 @@ export interface IFilterPanelProps {}
 
 export default function FilterPanel(props: IFilterPanelProps) {
   return (
-    <div className="flex items-center justify-between gap-2 py-2.5">
+    <div className="flex flex-col md:flex-row items-center justify-between gap-2 py-2.5">
       <div className="flex items-center justify-center gap-2">
         <p className="font-medium text-sm">Sort by:</p>
         <Select defaultValue={"best-price"}>

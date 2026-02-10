@@ -14,10 +14,41 @@ export const list: AppRouteHandler<ListRoute> = async (c) => {
   return c.json(prospects);
 };
 
+// export const create: AppRouteHandler<CreateRoute> = async (c) => {
+//   const userProfile = c.req.valid("json");
+//   const [inserted] = await db.insert(schema.userProfile).values(userProfile).returning();
+//   return c.json(inserted, HttpStatusCodes.CREATED);
+// };
+// apps/apis/src/routes/user-profile/user-profile.handlers.ts
 export const create: AppRouteHandler<CreateRoute> = async (c) => {
-  const userProfile = c.req.valid("json");
-  const [inserted] = await db.insert(schema.userProfile).values(userProfile).returning();
-  return c.json(inserted, HttpStatusCodes.CREATED);
+  try {
+    const userProfile = c.req.valid("json");
+    console.log("Inserting user profile:", userProfile);
+
+    const [inserted] = await db.insert(schema.userProfile)
+      .values(userProfile)
+      .returning();
+
+    console.log("Insert successful:", inserted);
+    return c.json(inserted, HttpStatusCodes.CREATED);
+  }
+  catch (error: any) {
+    // Log the actual database error
+    console.error("Database error details:", error);
+    console.error("Error message:", error.message);
+    console.error("Error code:", error.code);
+    console.error("Error detail:", error.detail);
+    console.error("Error constraint:", error.constraint);
+
+    return c.json(
+      {
+        error: "Failed to create user profile",
+        details: error.message,
+        constraint: error.constraint,
+      },
+      HttpStatusCodes.INTERNAL_SERVER_ERROR,
+    );
+  }
 };
 
 export const getOne: AppRouteHandler<GetOneRoute> = async (c) => {

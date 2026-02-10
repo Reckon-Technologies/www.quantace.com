@@ -27,16 +27,16 @@ import z from "zod";
 // Enhanced schema with proper validation rules
 const onboardingCoverageFormSchema = onboardingFormSchema
   .pick({
-    coverageType: true,
-    policyPlan: true,
-    policyStartDate: true,
+    coverage_type: true,
+    policy_plan: true,
+    policy_start_date: true,
     addons: true,
   })
   .extend({
     // Add specific validation rules
-    coverageType: z.string().min(1, "Coverage type is required"),
-    policyPlan: z.string().min(1, "Policy plan is required"),
-    policyStartDate: z.date({
+    coverage_type: z.string().min(1, "Coverage type is required"),
+    policy_plan: z.string().min(1, "Policy plan is required"),
+    policy_start_date: z.date({
       required_error: "Policy start date is required",
       invalid_type_error: "Please select a valid date",
     }),
@@ -58,9 +58,9 @@ export default function OnboardingCoverageFormDetails(
     mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {
-      coverageType: "",
-      policyPlan: "",
-      policyStartDate: undefined,
+      coverage_type: "",
+      policy_plan: "",
+      policy_start_date: undefined,
       addons: [],
     },
   });
@@ -71,7 +71,7 @@ export default function OnboardingCoverageFormDetails(
   const formErrors = form.formState.errors;
 
   async function onSubmit(data: OnboardingCoverageFormData) {
-    // console.log("Form submitted:", data);
+    console.log("Form submitted:", data);
 
     // Validate the form before proceeding
     const isValid = await form.trigger();
@@ -98,7 +98,7 @@ export default function OnboardingCoverageFormDetails(
           {/* Policy Start Date - Required */}
           <Controller
             control={form.control}
-            name="policyStartDate"
+            name="policy_start_date"
             render={({ field, fieldState }) => (
               <Field
                 className="col-span-12 @3xl:col-span-12 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -117,7 +117,7 @@ export default function OnboardingCoverageFormDetails(
                         className={`justify-start text-left font-normal w-full ${
                           fieldState.invalid ? "border-red-500" : ""
                         }`}
-                        id="policyStartDate"
+                        id="policy_start_date"
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         {field.value ? (
@@ -152,7 +152,7 @@ export default function OnboardingCoverageFormDetails(
           {/* Coverage Type - Required */}
           <Controller
             control={form.control}
-            name="coverageType"
+            name="coverage_type"
             render={({ field, fieldState }) => (
               <Field
                 className="col-span-12 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -164,7 +164,7 @@ export default function OnboardingCoverageFormDetails(
 
                 <div className="w-full">
                   <Select
-                    key="coverageType"
+                    key="coverage_type"
                     value={field.value}
                     onValueChange={field.onChange}
                   >
@@ -194,7 +194,7 @@ export default function OnboardingCoverageFormDetails(
           {/* Policy Plan - Required */}
           <Controller
             control={form.control}
-            name="policyPlan"
+            name="policy_plan"
             render={({ field, fieldState }) => (
               <Field
                 className="col-span-12 @3xl:col-span-12 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -206,7 +206,7 @@ export default function OnboardingCoverageFormDetails(
 
                 <div className="w-full">
                   <RadioCardsGroup
-                    key="policyPlan"
+                    key="policy_plan"
                     options={[
                       {
                         value: "Bronze",
@@ -516,9 +516,9 @@ export default function OnboardingCoverageFormDetails(
 // import z from "zod";
 
 // const onboardingNameFormSchema = onboardingFormSchema.pick({
-//   coverageType: true,
-//   policyPlan: true,
-//   policyStartDate: true,
+//   coverage_type: true,
+//   policy_plan: true,
+//   policy_start_date: true,
 //   addons: true,
 // });
 
@@ -537,9 +537,9 @@ export default function OnboardingCoverageFormDetails(
 //     mode: "onChange",
 //     reValidateMode: "onBlur",
 //     defaultValues: {
-//       coverageType: formData[coverageType] || "",
-//       policyPlan: formData[policyPlan] || "",
-//       policyStartDate: formData[policyStartDate] || undefined,
+//       coverage_type: formData[coverage_type] || "",
+//       policy_plan: formData[policy_plan] || "",
+//       policy_start_date: formData[policy_start_date] || undefined,
 //       addons: formData.addons || [],
 //     },
 //   });
@@ -565,7 +565,7 @@ export default function OnboardingCoverageFormDetails(
 //         <div className="grid grid-cols-12 gap-4 flex-1">
 //           <Controller
 //             control={form.control}
-//             name=policyStartDate
+//             name=policy_start_date
 //             render={({ field, fieldState }) => (
 //               <Field
 //                 className="col-span-12 @3xl:col-span-12 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -581,7 +581,7 @@ export default function OnboardingCoverageFormDetails(
 //                       <Button
 //                         variant={"outline"}
 //                         className="justify-start text-left font-normal w-full"
-//                         id=policyStartDate
+//                         id=policy_start_date
 //                         name=""
 //                       >
 //                         <CalendarIcon className="mr-2 h-4 w-4" />
@@ -612,7 +612,7 @@ export default function OnboardingCoverageFormDetails(
 //           />
 //           <Controller
 //             control={form.control}
-//             name=coverageType
+//             name=coverage_type
 //             render={({ field, fieldState }) => (
 //               <Field
 //                 className="col-span-12 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -622,7 +622,7 @@ export default function OnboardingCoverageFormDetails(
 
 //                 <div className="w-full">
 //                   <Select
-//                     key=coverageType
+//                     key=coverage_type
 //                     {...field}
 //                     onValueChange={field.onChange}
 //                   >
@@ -649,7 +649,7 @@ export default function OnboardingCoverageFormDetails(
 //           />
 //           <Controller
 //             control={form.control}
-//             name=policyPlan
+//             name=policy_plan
 //             render={({ field, fieldState }) => (
 //               <Field
 //                 className="col-span-12 @3xl:col-span-12 col-start-auto flex self-end flex-col gap-2 space-y-0 items-start"
@@ -659,7 +659,7 @@ export default function OnboardingCoverageFormDetails(
 
 //                 <div className="w-full">
 //                   <RadioCardsGroup
-//                     key=policyPlan
+//                     key=policy_plan
 //                     options={[
 //                       {
 //                         value: "Bronze",
